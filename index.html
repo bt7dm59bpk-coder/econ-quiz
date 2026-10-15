@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>三重应答·经济人格测试 | 你是哪种人？</title>
+<style>
+  :root{
+    --bg:#F7F3EC; --card:#FFFFFF; --ink:#1A1A1A; --sub:#8A8A8A;
+    --red:#C8102E; --blue:#1F3A5F; --gold:#C8862E; --line:#E6E0D6;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Noto Sans SC","Microsoft YaHei",system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:640px;margin:0 auto;padding:28px 18px 60px}
+  h1{font-size:30px;font-weight:800;letter-spacing:.5px}
+  .sub{color:var(--sub);font-size:14px;margin-top:6px}
+  .card{background:var(--card);border-radius:16px;box-shadow:0 4px 18px rgba(0,0,0,.06);padding:24px;margin-top:18px}
+  .btn{display:inline-block;background:var(--ink);color:#fff;border:none;border-radius:999px;padding:14px 30px;font-size:16px;font-weight:700;cursor:pointer;transition:transform .15s}
+  .btn:hover{transform:translateY(-2px)}
+  .hide{display:none}
+  .start{text-align:center}
+  .start .tag{display:inline-block;font-size:12px;color:var(--red);border:1px solid var(--red);border-radius:999px;padding:3px 12px;margin-bottom:14px}
+  .start p.intro{font-size:15px;color:#555;margin:14px 0 22px}
+  .prog{height:6px;background:var(--line);border-radius:999px;overflow:hidden;margin-bottom:18px}
+  .prog>span{display:block;height:100%;width:0;background:var(--ink);transition:width .3s}
+  .qnum{font-size:13px;color:var(--sub);margin-bottom:8px}
+  .qtext{font-size:20px;font-weight:700;margin-bottom:18px}
+  .opt{display:block;width:100%;text-align:left;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:12px;font-size:15.5px;cursor:pointer;transition:all .15s}
+  .opt:hover{border-color:var(--ink);transform:translateY(-1px)}
+  .res-head{text-align:center}
+  .res-type{font-size:13px;letter-spacing:2px;margin-bottom:6px}
+  .res-name{font-size:34px;font-weight:800;margin-bottom:4px}
+  .res-case{font-size:16px;color:var(--sub)}
+  .barline{height:5px;border-radius:999px;margin:16px 0}
+  .bento{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+  .bento .b{background:#FBF9F4;border-radius:12px;padding:14px}
+  .bento .b.full{grid-column:1/3}
+  .bento h3{font-size:12px;color:var(--sub);margin-bottom:6px;font-weight:700;letter-spacing:1px}
+  .bento p{font-size:14px}
+  .bento ul{padding-left:18px;font-size:13.5px}
+  .bento ul li{margin-bottom:3px}
+  .quote{font-size:17px;font-weight:700;text-align:center;margin:14px 0}
+  .flips{margin-top:26px}
+  .flips h2{font-size:18px;margin-bottom:4px}
+  .flips .hint{font-size:12px;color:var(--sub);margin-bottom:14px}
+  .flip-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .flip{perspective:1000px;cursor:pointer;height:150px}
+  .flip-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+  .flip.flipped .flip-inner{transform:rotateY(180deg)}
+  .face{position:absolute;inset:0;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;backface-visibility:hidden;padding:10px;text-align:center}
+  .front{background:#1A1A1A;color:#fff}
+  .front .t{font-size:18px;font-weight:800}
+  .front .s{font-size:11px;color:#bbb;margin-top:6px}
+  .back{transform:rotateY(180deg);color:#fff}
+  .back .t{font-size:16px;font-weight:800}
+  .back .d{font-size:11px;opacity:.85;margin-top:6px}
+  .f1 .back{background:var(--blue)} .f2 .back{background:var(--gold)} .f3 .back{background:var(--red)}
+  .actions{display:flex;gap:10px;justify-content:center;margin-top:22px;flex-wrap:wrap}
+  .btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--ink)}
+  footer{text-align:center;color:var(--sub);font-size:11.5px;margin-top:34px;line-height:1.7}
+  @media(max-width:420px){.flip-row{grid-template-columns:1fr;height:auto}.flip{height:120px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <section id="start" class="start">
+    <span class="tag">互动测试</span>
+    <h1>三重应答·经济人格测试</h1>
+    <p class="sub">你是秩序搭建师、开放破壁师，还是科技攻坚师？</p>
+    <div class="card">
+      <p class="intro">新时代经济建设的三重应答——制度·开放·创新。<br>8 道题，测出你的“经济人格”，看你对应哪个角色、哪套理论。</p>
+      <button class="btn" onclick="startQuiz()">开始测试</button>
+    </div>
+  </section>
+
+  <section id="quiz" class="hide">
+    <div class="card">
+      <div class="prog"><span id="progBar"></span></div>
+      <div class="qnum" id="qnum"></div>
+      <div class="qtext" id="qtext"></div>
+      <div id="opts"></div>
+    </div>
+  </section>
+
+  <section id="result" class="hide">
+    <div class="card res-head">
+      <div class="res-type" id="rType"></div>
+      <div class="res-name" id="rName"></div>
+      <div class="res-case" id="rCase"></div>
+      <div class="barline" id="rBar"></div>
+      <div class="quote" id="rQuote"></div>
+    </div>
+
+    <div class="card">
+      <div class="bento">
+        <div class="b full"><h3>对应案例</h3><p id="rCaseDesc"></p></div>
+        <div class="b full"><h3>你的理论点</h3><ul id="rTheory"></ul></div>
+        <div class="b full"><h3>你在三位一体中的角色</h3><p id="rRole"></p></div>
+      </div>
+    </div>
+
+    <div class="card flips">
+      <h2>三重挑战 ↔ 三重应答</h2>
+      <div class="hint">点击卡片翻转，看挑战如何被应答</div>
+      <div class="flip-row" id="flipRow"></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn ghost" onclick="restart()">再测一次</button>
+    </div>
+  </section>
+
+  <footer>三重应答·经济人格测试</footer>
+</div>
+
+<script>
+const questions=[
+ {q:'假如你是个 i 人县长，面对乱市，你的精神状态是？',o:[
+  {t:'组局拉客商聊天，被迫 e 化',d:'开放'},
+  {t:'钻进实验室搞攻关，谁也别来烦我',d:'创新'},
+  {t:'默默立一套规矩让市场自转，i 人狂喜',d:'制度'}]},
+ {q:'外面风浪大，中国先把哪样弄瓷实，心里才不烧心？',o:[
+  {t:'核心技术攥自己手里，命门不被卡',d:'创新'},
+  {t:'市场规矩立住，底盘稳了不烧心',d:'制度'},
+  {t:'把门开稳开大，路才能越走越宽',d:'开放'}]},
+ {q:'给你一座县城的规划图，你先画哪一笔？',o:[
+  {t:'修路通商，把货卖出去',d:'开放'},
+  {t:'立规矩护产权，小摊也能做大',d:'制度'},
+  {t:'引人才搞技术，靠本事翻身',d:'创新'}]},
+ {q:'民营经济要上桌，你给它安排哪个座位？',o:[
+  {t:'创新赛道，换挡提速',d:'创新'},
+  {t:'出海舞台，做大做强',d:'开放'},
+  {t:'主桌自己人，毫不动摇',d:'制度'}]},
+ {q:'说一个人“高水平”，你最服哪种？',o:[
+  {t:'立规矩稳得住',d:'制度'},
+  {t:'攻技术硬得过',d:'创新'},
+  {t:'通商路迎得广',d:'开放'}]},
+ {q:'给你一支笔写中国经济，你先写哪个字？',o:[
+  {t:'通',d:'开放'},
+  {t:'规',d:'制度'},
+  {t:'创',d:'创新'}]},
+ {q:'建全国统一大市场，你觉得先拆哪堵墙？',o:[
+  {t:'准入壁垒，让谁都能进',d:'制度'},
+  {t:'信息孤岛，用数字打通',d:'创新'},
+  {t:'地方围墙，让货能流通',d:'开放'}]},
+ {q:'中国经济建设缺你一个，你挑哪个工位？',o:[
+  {t:'攻坚岗，把技术啃下',d:'创新'},
+  {t:'连通岗，把接口焊牢',d:'开放'},
+  {t:'立规岗，把规矩搭好',d:'制度'}]}
+];
+
+const results={
+ '制度':{label:'制度型',name:'秩序搭建师',caseName:'义乌',color:'#C8102E',
+  caseDesc:'1982 年谢高华拍板开放市场、确立“兴商建县”，从“鸡毛换糖”长出全球最大的小商品批发市场。',
+  theory:['使市场在资源配置中起决定性作用 + 更好发挥政府作用','“两个毫不动摇”（公有制为主 + 多种所有制共同发展）','全国统一大市场 · 要素市场化配置'],
+  quote:'把市场的还给市场，把政府的责任扛在政府肩上。',
+  role:'基础——没有你，市场主体活力释放不出来，义乌无从生长。'},
+ '开放':{label:'开放型',name:'开放破壁师',caseName:'海南',color:'#1F3A5F',
+  caseDesc:'海南自由贸易港——从要素流动型开放升级到制度型开放，零关税、低税率、简税制，贸易投资资金人员运输数据六个自由便利。',
+  theory:['制度型开放（规则·规制·管理·标准对接）','共建“一带一路”','推动形成全面开放新局面（主动/双向/全面/公平/共赢/包容）'],
+  quote:'从地理意义的枢纽，变成规则意义的接口。',
+  role:'条件——没有你，资源和市场只在境内打转，海南无从起飞。'},
+ '创新':{label:'创新型',name:'科技攻坚师',caseName:'华为',color:'#C8862E',
+  caseDesc:'2019 年被列入美国实体清单、芯片断供；四年后搭载国产麒麟芯片的 Mate 回归、鸿蒙走出独立生态。',
+  theory:['教育、科技、人才一体（科技第一生产力·人才第一资源·创新第一动力）','高水平科技自立自强','新型举国体制 · 国家战略科技力量'],
+  quote:'关键核心技术是要不来、买不来、讨不来的。',
+  role:'动力——没有你，开放再深也只是“世界超市”，永远在价值链底端。'}
+};
+
+const flips=[
+ {front:'逆全球化',cls:'f1',back:'制度型开放',case:'海南',desc:'用规则对接赢得主动'},
+ {front:'卡脖子',cls:'f2',back:'科技自立自强',case:'华为',desc:'关键核心技术攻坚战'},
+ {front:'资本无序',cls:'f3',back:'为资本设红绿灯',case:'制度规范',desc:'规范引导资本健康发展'}
+];
+
+let idx=0, score={制度:0,开放:0,创新:0};
+
+function startQuiz(){
+  idx=0;score={制度:0,开放:0,创新:0};
+  document.getElementById('start').classList.add('hide');
+  document.getElementById('result').classList.add('hide');
+  document.getElementById('quiz').classList.remove('hide');
+  renderQ();
+}
+function renderQ(){
+  const q=questions[idx];
+  const pct=((idx)/questions.length*100).toFixed(0);
+  document.getElementById('progBar').style.width=pct+'%';
+  document.getElementById('qnum').textContent='第 '+(idx+1)+' / '+questions.length+' 题';
+  document.getElementById('qtext').textContent=q.q;
+  const opts=document.getElementById('opts');
+  opts.innerHTML='';
+  q.o.forEach(o=>{
+    const b=document.createElement('button');
+    b.className='opt';b.textContent=o.t;
+    b.onclick=()=>{choose(o.d)};
+    opts.appendChild(b);
+  });
+}
+function choose(d){
+  score[d]++;
+  idx++;
+  if(idx>=questions.length){showResult();}
+  else{renderQ();}
+}
+function showResult(){
+  let max=-1,key='制度';
+  ['制度','开放','创新'].forEach(k=>{if(score[k]>max){max=score[k];key=k;}});
+  const r=results[key];
+  document.getElementById('quiz').classList.add('hide');
+  document.getElementById('result').classList.remove('hide');
+  const type=document.getElementById('rType');
+  type.textContent=r.label+' · 经济人格';
+  type.style.color=r.color;
+  const name=document.getElementById('rName');name.textContent=r.name;name.style.color=r.color;
+  document.getElementById('rCase').textContent='对应案例：'+r.caseName;
+  const bar=document.getElementById('rBar');bar.style.background=r.color;
+  document.getElementById('rQuote').textContent='“'+r.quote+'”';
+  document.getElementById('rCaseDesc').textContent=r.caseDesc;
+  const ul=document.getElementById('rTheory');ul.innerHTML='';
+  r.theory.forEach(t=>{const li=document.createElement('li');li.textContent=t;ul.appendChild(li);});
+  document.getElementById('rRole').textContent=r.role;
+  const fr=document.getElementById('flipRow');fr.innerHTML='';
+  flips.forEach(f=>{
+    const d=document.createElement('div');d.className='flip '+f.cls;
+    d.innerHTML='<div class="flip-inner"><div class="face front"><div class="t">'+f.front+'</div><div class="s">点击翻转</div></div><div class="face back"><div class="t">'+f.back+'</div><div class="d">'+f.case+' · '+f.desc+'</div></div></div>';
+    d.onclick=()=>d.classList.toggle('flipped');
+    fr.appendChild(d);
+  });
+  window._resKey=key;
+}
+function restart(){
+  document.getElementById('result').classList.add('hide');
+  document.getElementById('start').classList.remove('hide');
+}
+function saveCard(){
+  const key=window._resKey;const r=results[key];
+  const c=document.createElement('canvas');c.width=750;c.height=1050;
+  const x=c.getContext('2d');
+  x.fillStyle='#F7F3EC';x.fillRect(0,0,750,1050);
+  x.fillStyle=r.color;x.fillRect(0,0,750,18);
+  x.fillStyle='#8A8A8A';x.font='600 26px "Microsoft YaHei",sans-serif';x.textAlign='center';
+  x.fillText(r.label+' · 经济人格',375,120);
+  x.fillStyle=r.color;x.font='800 70px "Microsoft YaHei",sans-serif';
+  x.fillText(r.name,375,210);
+  x.fillStyle='#1A1A1A';x.font='600 30px "Microsoft YaHei",sans-serif';
+  x.fillText('对应案例：'+r.caseName,375,265);
+  x.font='400 26px "Microsoft YaHei",sans-serif';x.fillStyle='#444';
+  wrapText(x,r.caseDesc,375,330,640,38);
+  x.fillStyle=r.color;x.font='700 30px "Microsoft YaHei",sans-serif';
+  wrapText(x,'“'+r.quote+'”',375,520,640,40);
+  x.fillStyle='#1A1A1A';x.font='600 26px "Microsoft YaHei",sans-serif';
+  wrapText(x,'你在三位一体中的角色：'+r.role,375,640,640,38);
+  x.fillStyle='#8A8A8A';x.font='400 22px "Microsoft YaHei",sans-serif';
+  x.fillText('三重应答·经济人格测试',375,990);
+  x.fillStyle=r.color;x.fillRect(0,1032,750,18);
+  const a=document.createElement('a');a.download='经济人格_'+r.name+'.png';a.href=c.toDataURL('image/png');a.click();
+}
+function wrapText(ctx,text,x,y,maxW,lh){
+  const chars=text.split('');let line='';let yy=y;
+  for(let i=0;i<chars.length;i++){
+    const test=line+chars[i];
+    if(ctx.measureText(test).width>maxW && line){ctx.fillText(line,x,yy);line=chars[i];yy+=lh;}
+    else{line=test;}
+  }
+  if(line)ctx.fillText(line,x,yy);
+}
+</script>
+</body>
+</html>
