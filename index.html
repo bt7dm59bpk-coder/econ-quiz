@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>三重应答·经济人格测试 | 你是哪种人？</title>
+<title>经济人格测试 | 你是哪种人？</title>
 <style>
   :root{
     --bg:#F7F3EC; --card:#FFFFFF; --ink:#1A1A1A; --sub:#8A8A8A;
@@ -58,19 +58,115 @@
   .actions{display:flex;gap:10px;justify-content:center;margin-top:22px;flex-wrap:wrap}
   .btn.ghost{background:#fff;color:var(--ink);border:1.5px solid var(--ink)}
   footer{text-align:center;color:var(--sub);font-size:11.5px;margin-top:34px;line-height:1.7}
-  @media(max-width:420px){.flip-row{grid-template-columns:1fr;height:auto}.flip{height:120px}}
+
+  /* ===== 首页 Hero ===== */
+  .hero{text-align:center;padding-top:8px}
+  .hero .badge{display:inline-block;font-size:12px;color:var(--red);border:1px solid var(--red);border-radius:999px;padding:4px 14px;margin-bottom:16px;background:rgba(200,16,46,.04)}
+  .hero .emoji-line{font-size:34px;letter-spacing:6px;margin-bottom:6px;line-height:1}
+  .hero h1{font-size:34px;font-weight:900;letter-spacing:1px;background:linear-gradient(120deg,#1F3A5F,#C8102E 70%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .hero .lead{font-size:15px;color:#555;margin:16px auto 0;max-width:440px;line-height:1.75}
+  .hero .lead b{color:var(--ink)}
+
+  .triple{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:24px 0 6px}
+  .tcard{background:#fff;border-radius:14px;padding:16px 8px;box-shadow:0 4px 16px rgba(0,0,0,.05);border:1px solid var(--line);transition:transform .18s}
+  .tcard:hover{transform:translateY(-3px)}
+  .tcard .ico{font-size:26px;line-height:1}
+  .tcard .nm{font-size:13.5px;font-weight:800;margin-top:8px}
+  .tcard .kw{font-size:11px;color:var(--sub);margin-top:3px}
+  .tcard.c1{border-top:3px solid var(--blue)}
+  .tcard.c2{border-top:3px solid var(--gold)}
+  .tcard.c3{border-top:3px solid var(--red)}
+
+  .feat{display:flex;justify-content:center;gap:26px;margin:22px 0 4px;flex-wrap:wrap}
+  .feat .it{text-align:center}
+  .feat .it .n{font-size:22px;font-weight:900;color:var(--blue)}
+  .feat .it .l{font-size:11.5px;color:var(--sub);margin-top:2px}
+
+  .lead-cta{margin:20px 0 2px;font-size:13.5px;color:var(--sub)}
+
+  /* 案例条 */
+  .casebar{background:#FFFFFF;border:1px solid var(--line);border-radius:16px;padding:20px 16px 18px;margin-top:16px;box-shadow:0 4px 18px rgba(0,0,0,.06)}
+  .casebar .cbar-t{color:var(--ink);font-size:14px;font-weight:800;text-align:center;margin-bottom:14px;letter-spacing:.5px}
+  .case-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+  .cg{background:#FBF9F4;border:1px solid var(--line);border-radius:12px;padding:12px 6px;text-align:center}
+  .cg-ico{font-size:24px;line-height:1}
+  .cg-nm{color:var(--ink);font-size:13px;font-weight:800;margin-top:7px}
+  .cg-d{color:var(--sub);font-size:10.5px;margin-top:4px;line-height:1.4}
+  .casebar .cbar-f{color:var(--sub);font-size:12px;text-align:center;margin-top:14px}
+
+  .start-cta{margin-top:16px}
+  .start-cta .btn{width:100%;padding:16px 30px;font-size:17px;box-shadow:0 8px 20px rgba(26,26,26,.18)}
+  .start-cta .tip{font-size:11.5px;color:var(--sub);margin-top:12px}
+
+  .start .tag{display:inline-block;font-size:12px;color:var(--red);border:1px solid var(--red);border-radius:999px;padding:3px 12px;margin-bottom:14px}
+  .start p.intro{font-size:15px;color:#555;margin:14px 0 22px}
+
+  @media(max-width:420px){
+    .flip-row{grid-template-columns:1fr;height:auto}.flip{height:120px}
+    .hero h1{font-size:28px}
+    .hero .emoji-line{font-size:28px}
+    .tcard{padding:13px 5px}
+    .tcard .nm{font-size:12px}
+    .cg-nm{font-size:12px}
+    .cg-d{font-size:9.5px}
+  }
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <section id="start" class="start">
-    <span class="tag">互动测试</span>
-    <h1>三重应答·经济人格测试</h1>
-    <p class="sub">你是秩序搭建师、开放破壁师，还是科技攻坚师？</p>
-    <div class="card">
-      <p class="intro">新时代经济建设的三重应答——制度·开放·创新。<br>8 道题，测出你的“经济人格”，看你对应哪个角色、哪套理论。</p>
-      <button class="btn" onclick="startQuiz()">开始测试</button>
+    <div class="hero">
+      <span class="badge">🎯 互动测试 · 约 1 分钟</span>
+      <div class="emoji-line">🏛️ 🌏 🚀</div>
+      <h1>经济人格测试</h1>
+      <p class="lead">围绕新时代经济建设的 <b>制度、开放、创新</b> 三个关键词，<br>8 道趣味题，测出你属于哪一种“经济人格”。</p>
+
+      <div class="triple">
+        <div class="tcard c1">
+          <div class="ico">🏛️</div>
+          <div class="nm">秩序搭建师</div>
+          <div class="kw">制度 · 立规矩</div>
+        </div>
+        <div class="tcard c2">
+          <div class="ico">🌏</div>
+          <div class="nm">开放破壁师</div>
+          <div class="kw">开放 · 通商路</div>
+        </div>
+        <div class="tcard c3">
+          <div class="ico">🚀</div>
+          <div class="nm">科技攻坚师</div>
+          <div class="kw">创新 · 攻技术</div>
+        </div>
+      </div>
+
+      <div class="lead-cta">测出你的经济人格，解锁专属角色卡 👇</div>
+    </div>
+
+    <div class="casebar">
+      <div class="cbar-t">三种人格 · 对应三个真实样本</div>
+      <div class="case-grid">
+        <div class="cg">
+          <div class="cg-ico">🧺</div>
+          <div class="cg-nm">义乌</div>
+          <div class="cg-d">世界超市 · 政府与市场</div>
+        </div>
+        <div class="cg">
+          <div class="cg-ico">🏝️</div>
+          <div class="cg-nm">海南自贸港</div>
+          <div class="cg-d">高水平开放 · 制度创新</div>
+        </div>
+        <div class="cg">
+          <div class="cg-ico">📡</div>
+          <div class="cg-nm">华为</div>
+          <div class="cg-d">科技自立自强 · 攻卡脖子</div>
+        </div>
+      </div>
+      <div class="cbar-f">测完看你和哪个样本最合拍 ✨</div>
+    </div>
+
+    <div class="card start-cta">
+      <button class="btn" onclick="startQuiz()">开始测试 →</button>
     </div>
   </section>
 
@@ -111,7 +207,7 @@
     </div>
   </section>
 
-  <footer>三重应答·经济人格测试</footer>
+  <footer>经济人格测试 · 制度 · 开放 · 创新</footer>
 </div>
 
 <script>
@@ -233,29 +329,6 @@ function showResult(){
 function restart(){
   document.getElementById('result').classList.add('hide');
   document.getElementById('start').classList.remove('hide');
-}
-function saveCard(){
-  const key=window._resKey;const r=results[key];
-  const c=document.createElement('canvas');c.width=750;c.height=1050;
-  const x=c.getContext('2d');
-  x.fillStyle='#F7F3EC';x.fillRect(0,0,750,1050);
-  x.fillStyle=r.color;x.fillRect(0,0,750,18);
-  x.fillStyle='#8A8A8A';x.font='600 26px "Microsoft YaHei",sans-serif';x.textAlign='center';
-  x.fillText(r.label+' · 经济人格',375,120);
-  x.fillStyle=r.color;x.font='800 70px "Microsoft YaHei",sans-serif';
-  x.fillText(r.name,375,210);
-  x.fillStyle='#1A1A1A';x.font='600 30px "Microsoft YaHei",sans-serif';
-  x.fillText('对应案例：'+r.caseName,375,265);
-  x.font='400 26px "Microsoft YaHei",sans-serif';x.fillStyle='#444';
-  wrapText(x,r.caseDesc,375,330,640,38);
-  x.fillStyle=r.color;x.font='700 30px "Microsoft YaHei",sans-serif';
-  wrapText(x,'“'+r.quote+'”',375,520,640,40);
-  x.fillStyle='#1A1A1A';x.font='600 26px "Microsoft YaHei",sans-serif';
-  wrapText(x,'你在三位一体中的角色：'+r.role,375,640,640,38);
-  x.fillStyle='#8A8A8A';x.font='400 22px "Microsoft YaHei",sans-serif';
-  x.fillText('三重应答·经济人格测试',375,990);
-  x.fillStyle=r.color;x.fillRect(0,1032,750,18);
-  const a=document.createElement('a');a.download='经济人格_'+r.name+'.png';a.href=c.toDataURL('image/png');a.click();
 }
 function wrapText(ctx,text,x,y,maxW,lh){
   const chars=text.split('');let line='';let yy=y;
